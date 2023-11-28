@@ -1,14 +1,17 @@
 import React, { Fragment, useState } from "react";
 import "./FoodOrder.css";
 import { useContext } from "react";
-import { foodItemsContext } from "./App";
+import { FoodsContext } from "./contextos/AppContext";
 
-const FoodOrder = (props) => {
-  const selectedFood = props.food;
+const FoodOrder = () => {
+
+  const FoodsCtx = useContext(FoodsContext)
+
+  const selectedFood = FoodsCtx.food;
   const [quantity, setQuantity] = useState(1);
   const [totalAmount, setTotalAmount] = useState(selectedFood.price);
   const [isOrdered, setIsOrdered] = useState(false);
-  const menuItems = useContext(foodItemsContext);
+
   
   const handleQuantityChange = (event) => {
     setTotalAmount(selectedFood.price * event.target.value);
@@ -23,11 +26,12 @@ const FoodOrder = (props) => {
 
   return (
     <>
-      <h4 className="selFoodTitle">{selectedFood.name}</h4>
+    <FoodsContext.Provider>
+      <h4 className="selFoodTitle">{FoodsCtx.name}</h4>
       
       <ul className="ulFoodDetails">
         <li>
-          <p className="selFoodDesc">{selectedFood.desc}</p>
+          <p className="selFoodDesc">{FoodsCtx.desc}</p>
         </li>
         <li>
           <p className="selFoodPrice">{totalAmount}$</p>
@@ -69,7 +73,7 @@ const FoodOrder = (props) => {
           <button className="btn btnOrder" onClick={handleClick}>
             Submit Order
           </button>
-          <button className="btn btnReturnMenu" onClick={props.returnToMenu}>
+          <button className="btn btnReturnMenu" onClick={FoodsCtx.returnToMenu}>
             Return to Menu
           </button>
         </li>
@@ -81,6 +85,7 @@ const FoodOrder = (props) => {
           </li>
         )}
       </ul>
+      </FoodsContext.Provider>
     </>
   );
 };
