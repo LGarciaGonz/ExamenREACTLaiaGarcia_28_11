@@ -40,17 +40,9 @@ const columns = [
   },
 ];
 
-const users = [
-  {nombre: 'nombre1'},
-  {lastName: 'apellido1'},
-  {program: 'UG'},
-  {email: 'EMAIL@EMAIL1'}
-]
-const [usuarios, addUsuario] = useState([]);
-const [value, setValue] = useState("");
 
-// // Change items by elements introduces in other component
-// const  items = [];
+ // Change items by elements introduces in other component
+ const  items = [];
 // for (let i = 1; i < 5; i++) {
 //   items.push({
 //     key: i,
@@ -66,7 +58,14 @@ const [value, setValue] = useState("");
 // }
 
 function addList(){
-  addUsuario([...usuarios, value])
+  console.log("añadiendo items")
+ items.push({
+  key: enteredNombre,
+  fname: enteredNombre,
+  lname: enteredLastName,
+  program: enteredProgram,
+  email: enteredEmail
+ })
 }
 
 // CAMPO NOMBRE *************
@@ -252,7 +251,7 @@ function handleSubmit(e) {
 <br/><br/><br/>
 
         <div className="enrolList">
-          <DetailsList items={usuarios} columns={columns} />
+          <DetailsList items={items} columns={columns} />
         </div>
     </form>
   
