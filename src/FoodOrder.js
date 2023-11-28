@@ -9,6 +9,7 @@ const FoodOrder = (props) => {
   const [totalAmount, setTotalAmount] = useState(selectedFood.price);
   const [isOrdered, setIsOrdered] = useState(false);
   const menuItems = useContext(foodItemsContext);
+  
   const handleQuantityChange = (event) => {
     setTotalAmount(selectedFood.price * event.target.value);
     setQuantity(event.target.value);

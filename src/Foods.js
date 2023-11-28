@@ -1,13 +1,18 @@
 import React, {  useState } from "react";
 import "./Foods.css";
 import FoodOrder from "./FoodOrder";
+import { useContext } from 'react';
+import { ItemsContext } from "./contextos/AppContext";
+
 const Foods = (props) => {
   const [selectedFood, setSelectedFood] = useState("");
+
+  const ItemCtx = useContext(ItemsContext)
 
   const handleSelect = (event) => {
     setSelectedFood(
       props.foodItems.find((item) => {
-        return item.id === parseInt(event.currentTarget.dataset.id);
+        return ItemCtx.id === parseInt(event.currentTarget.dataset.id);
       })
     );
   };
@@ -21,19 +26,19 @@ const Foods = (props) => {
             {props.foodItems.map((item) => {
               return (
                 <li
-                  key={item.id}
+                  key={ItemCtx.id}
                   className="liFoods"
-                  data-id={item.id}
+                  data-id={ItemCtx.id}
                   onClick={handleSelect}
                 >
                   <img
                     className="foodImg"
-                    src={require(`./images/${item.image}`)}
+                    src={require(`./images/${ItemCtx.image}`)}
                     alt={item.name}
                   />
                   <div className="foodItem">
-                    <p className="foodDesc">{item.desc}</p>
-                    <p className="foodPrice">{item.price}$</p>
+                    <p className="foodDesc">{ItemCtx.desc}</p>
+                    <p className="foodPrice">{ItemCtx.price}$</p>
                   </div>
                 </li>
               );

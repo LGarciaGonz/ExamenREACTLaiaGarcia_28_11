@@ -2,6 +2,8 @@ import "./App.css";
 import React, { useState } from "react";
 import Foods from "./Foods";
 export const foodItemsContext = React.createContext();
+import { FoodsContext } from "./contextos/AppContext";
+
 const App = () => {
   const [isChooseFoodPage, setIsChooseFoodPage] = useState(false);
   const [menuItems, setMenuItems] = useState([
@@ -41,7 +43,7 @@ const App = () => {
 
 
   return (
-    <foodItemsContext.Provider value={menuItems}>
+    <FoodsContext.Provider value={menuItems}>
     <div className="App">
       
         
@@ -53,8 +55,8 @@ const App = () => {
           <ul className="ulApp">
             {menuItems.map((item) => {
               return (
-                <li key={item.id} className="liApp">
-                  {item.name} - {item.quantity}
+                <li key={foodItemsContext.id} className="liApp">
+                  {foodItemsContext.name} - {foodItemsContext.quantity}
                 </li>
               );
             })}
@@ -63,12 +65,12 @@ const App = () => {
       
       
         <Foods
-          foodItems={menuItems}
+          foodItems={foodItemsContext.menuItems}
         
         ></Foods>
       
     </div>
-    </foodItemsContext.Provider>
+    </FoodsContext.Provider>
   );
 };
 
